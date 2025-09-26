@@ -31,6 +31,11 @@ const result = await msgModel.create({ message });
 
     res.status(200).json({msg:"A new Message added to DB"});
 }
+const getmessages = async(req,res)=>{
+    let messages = await msgModel.find();
+    
+    res.status(200).json(messages);
+}
 app.post("/senddistress",processmessages);
-
+app.get("/getdistresses",getmessages);
 app.listen(port, () => console.log(`Server running on port ${port}`));
