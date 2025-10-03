@@ -20,14 +20,16 @@ mongoose.connect(process.env.MONGO_URI)
 
 let messageSchema = new mongoose.Schema({
      message : { type : String },
+     lat:{type:String},
+     lng:{type:String}
 })
 
 let msgModel = new mongoose.model('DistressMessage',messageSchema)
 
 
 const processmessages = async(req,res) =>{
-    const { message } = req.body;
-const result = await msgModel.create({ message });
+    const { message,lat,lng } = req.body;
+const result = await msgModel.create({ message,lat,lng });
 
     res.status(200).json({msg:"A new Message added to DB"});
 }
