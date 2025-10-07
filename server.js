@@ -19,8 +19,8 @@ mongoose.connect(process.env.MONGO_URI)
 })
 
 let messageSchema = new mongoose.Schema({
-    nodeID:{type:int},
-    seqNo:{type:int},
+    nodeID:{type:Number},
+    seqNo:{type:Number},
      message : { type : String },
      lat:{type:String},
      lng:{type:String}
