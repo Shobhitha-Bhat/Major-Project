@@ -2,6 +2,8 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors"
 
+import dotenv from "dotenv";
+dotenv.config();
 
 
 const app = express() //fetch express functionality
@@ -21,17 +23,18 @@ mongoose.connect(process.env.MONGO_URI)
 let messageSchema = new mongoose.Schema({
     nodeID:{type:Number},
     seqNo:{type:Number},
-     message : { type : String },
-     lat:{type:String},
-     lng:{type:String}
+    message : { type : String },
+    //  lat:{type:String},
+    //  lng:{type:String}
+    coordinates : {type: String}
 })
 
 let msgModel = new mongoose.model('DistressMessage',messageSchema)
 
 
 const processmessages = async(req,res) =>{
-    const { nodeID,seqNo,message,lat,lng } = req.body;
-const result = await msgModel.create({ nodeID,seqNo,message,lat,lng });
+    const { nodeID,seqNo,message,coordinates } = req.body;
+const result = await msgModel.create({ nodeID,seqNo,message,coordinates });
 
     res.status(200).json({msg:"A new Message added to DB"});
 }
